@@ -22,6 +22,8 @@
 \usepackage[dvipsnames]{xcolor}
 \usepackage[normalem]{ulem}
 
+\usepackage{svg}
+
 \def\today{\number\year-\ifthenelse{\number\month<10}{0}{}\number\month-\ifthenelse{\number\day<10}{0}{}\number\day} % Defines \today as YYYY-MM-DD
 
 \AtBeginDocument{}
@@ -31,7 +33,7 @@
 \pagestyle{fancy}
 \renewcommand{\headrulewidth}{0pt}
 \headheight 25pt
-\lhead{KTH}
+\lhead{AU}
 \chead{\hspace{3mm} \thelistings \gdef\thelistings{}}
 \rhead{\thepage}
 %\lhead{}\chead{\thepage}\rhead{}
@@ -158,8 +160,8 @@
 	\begin{center}
 		\strut % Magic
 		\vspace{3cm}\\
-		\includegraphics[width=3cm]{kth}\\
-		{\Huge KTH Royal Institute of Technology\\}
+		\includesvg[width=3cm]{au_seal}\\
+		{\Huge Aarhus University\\}
 		{\fontsize{60}{60}\selectfont #1\\}
 		\vspace{0.5cm}
 		{\Large #2\\}
