@@ -179,9 +179,9 @@
 \newcommand{\kactlref}[1]{
 	\ifthenelse{\boolean{appendixmode}}{}{
 		\ifnum \value{section} > 0
-			\addcontentsline{ptc}{subsection}{\texttt{#1}\hspace{0.2em}}
+			\addcontentsline{toc}{subsection}{\texttt{#1}\hspace{0.2em}}
 		\else
-			\addcontentsline{ptc}{section}{\texttt{#1}\hspace{0.2em}}
+			\addcontentsline{toc}{section}{\texttt{#1}\hspace{0.2em}}
 		\fi
 	}
 }
