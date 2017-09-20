@@ -18,11 +18,13 @@ help:
 fast:
 	cd build && $(LATEXCMD) kactl.tex </dev/null
 	cp build/kactl.pdf kactl.pdf
+	./check-pages.sh
 
 .PHONY: kactl
 kactl: test-session.pdf
 	cd build && $(LATEXCMD) kactl.tex && $(LATEXCMD) kactl.tex
 	cp build/kactl.pdf kactl.pdf
+	./check-pages.sh
 
 .PHONY: clean
 clean: 
