@@ -3,7 +3,7 @@
  * Date: 2017-09-29
  * License: CC0
  * Description: Negative return value means no match found.
- * Time: O(N M)
+ * Time: O(N + M)
  */
 #pragma once
 
