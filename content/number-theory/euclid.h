@@ -7,6 +7,7 @@
 #pragma once
 
 ll gcd(ll a, ll b) { return __gcd(a, b); }
+ll lcm(ll a, ll b) { return abs(a) / gcd(a, b) * abs(b); }
 
 ll euclid(ll a, ll b, ll &x, ll &y) {
 	if (b) { ll d = euclid(b, a % b, y, x);
