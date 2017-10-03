@@ -8,6 +8,10 @@
 		\import{factorial.tex}
 		\kactlimport{intperm.h}
 
+	\section{Inversions}
+	Let $\sigma$ be a permutation with cycles of length $r_1, \dots, r_n$. Then $\mathrm{sgn}(\sigma) = \prod_{i=1}^n {(-1)}^{r_i - 1}$, where $\mathrm{sgn}(\sigma) = 1$ if the permutation has an even number of inversions else $-1$.
+	\kactlimport{inversions.h}
+
 	\subsection{Cycles}
 		Let the number of $n$-permutations whose cycle lengths all belong to the set $S$ be denoted by $g_S(n)$. Then
 		$$\sum_{n=0} ^\infty g_S(n) \frac{x^n}{n!} = \exp\left(\sum_{n\in S} \frac{x^n} {n} \right)$$
