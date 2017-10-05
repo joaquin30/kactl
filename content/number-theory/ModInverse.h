@@ -4,6 +4,7 @@
  * License: CC0
  * Source: Russian page
  * Description: Pre-computation of modular inverses. Assumes LIM $\le$ mod and that mod is a prime.
+ * If the base is a prime then $a^{-1} \equiv a^{p-2}$.
  * Status: Works
  */
 #pragma once
