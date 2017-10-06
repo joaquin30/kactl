@@ -216,6 +216,8 @@ def main(argv=None):
 			processraw(caption, instream, outstream, 'C++')
 		elif language == "sh":
 			processraw(caption, instream, outstream, 'bash')
+		elif language == "py":
+			processraw(caption, instream, outstream, 'Python')
 		else:
 			raise ValueError("Unkown language: " + str(language))
 	except (ValueError, getopt.GetoptError, IOError), err:
