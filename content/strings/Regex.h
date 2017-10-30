@@ -14,6 +14,6 @@ regex_t re{};
 re.fastmap = (char *)malloc(256);
 re_compile_pattern(pattern.data(), sz(pattern), &re);
 string S = "aaa";
-int matched = re_match(&buf, S.data(), sz(S), 0, nullptr);
-int i = re_search(&buf, S.data(), sz(S), 0, sz(S), nullptr);
+int matched = re_match(&re, S.data(), sz(S), 0, nullptr);
+int i = re_search(&re, S.data(), sz(S), 0, sz(S), nullptr);
 regfree(&re);
