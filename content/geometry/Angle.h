@@ -28,6 +28,11 @@ struct Angle {
 	Angle t90() const { return {-y, x, t + (quad() == 3)}; }
 	Angle t180() const { return {-x, -y, t + (quad() >= 2)}; }
 	Angle t360() const { return {x, y, t + 1}; }
+	Angle diff(Angle a, Angle b) {
+		int tu = b.t - a.t;
+		a.t = b.t = 0;
+		return Angle(a.x * b.x + a.y * b.y, a.x * b.y - a.y * b.x, tu - (b < a));
+	}
 };
 bool operator<(Angle a, Angle b) {
 	// add a.dist2() and b.dist2() to also compare distances
