@@ -12,8 +12,8 @@ template <typename T>
 struct Rational {
 	using R = Rational<T>;
 	T n, d;
-	Rational(T n) : n(n), d(1) {}
-	Rational(T n, T d): n(n), d(d) {
+	Rational(T _n) : n(_n), d(1) {}
+	Rational(T _n, T _d): n(_n), d(_d) {
 		T g = gcd(n, d);
 		n /= g, d /= g;
 		if (d < 0) n *= -1, d *= -1;
