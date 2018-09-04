@@ -4,23 +4,21 @@
  * License: CC0
  * Source: Folklore
  * Status: Somewhat tested
- * Description: Lowest common ancestor. Finds the lowest common
- * ancestor in a tree (with 0 as root). C should be an adjacency list of the tree,
+ * Description: Data structure for computing lowest common
+ * ancestors in a tree (with 0 as root). C should be an adjacency list of the tree,
  * either directed or undirected.
  * Can also find the distance between two nodes.
  * Usage:
  *  LCA lca(undirGraph);
  *  lca.query(firstNode, secondNode);
  *  lca.distance(firstNode, secondNode);
- * Time: $O(|V| \log |V| + Q)$
+ * Time: $O(N \log N + Q)$
  */
 #pragma once
 
 typedef vector<pii> vpi;
 typedef vector<vpi> graph;
-const pii inf(1 << 29, -1);
 
-#define RMQ_HAVE_INF /** exclude-line */
 #include "../data-structures/RMQ.h"
 
 struct LCA {
@@ -31,7 +29,7 @@ struct LCA {
 	LCA(graph& C) : time(sz(C), -99), dist(sz(C)), rmq(dfs(C)) {}
 
 	vpi dfs(graph& C) {
-		vector<tuple<int, int, int, ll> > q(1);
+		vector<tuple<int, int, int, ll>> q(1);
 		vpi ret;
 		int T = 0, v, p, d; ll di;
 		while (!q.empty()) {
