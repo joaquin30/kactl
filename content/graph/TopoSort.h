@@ -9,8 +9,7 @@
  */
 #pragma once
 
-template<class E, class I>
-bool topo_sort(const E &edges, I &idx, int n) {
+bool topo_sort(const vector<vi> &edges, vi &sorted, int n) {
 	vi indeg(n);
 	rep(i,0,n)
 		trav(e, edges[i])
