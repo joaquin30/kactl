@@ -1,7 +1,7 @@
 # KACTL
 
 This repo hosts KACTL, KTH's ICPC team reference document.
-It consists of 25 pages of copy-paste:able code, for use in ACM-ICPC-style programming competitions.
+It consists of 25 pages of copy-paste:able code, for use in ICPC-style programming competitions.
 
 See [kactl.pdf](https://gitlab.au.dk/tyilo/kactl/blob/master/kactl.pdf) for the final, browsable version,
 and [content/](https://gitlab.au.dk/tyilo/kactl/tree/master/content) for raw source code.
