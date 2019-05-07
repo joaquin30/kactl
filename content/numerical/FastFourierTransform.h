@@ -1,5 +1,5 @@
 /**
- * Author: Ludo Pulles, Horace He, Simon Lindholm
+ * Author: Ludo Pulles, chilli, Simon Lindholm
  * Date: 2019-01-09
  * License: CC0
  * Source: http://neerc.ifmo.ru/trains/toulouse/2017/fft2.pdf (do read, it's excellent)
@@ -10,7 +10,7 @@
    For convolution of complex numbers or more than two vectors: FFT, multiply
    pointwise, divide by n, reverse(start+1, end), FFT back.
    For integers, consider using a number-theoretic transform instead, to avoid rounding issues.
- * Time: O(N \log N), where $N = |A|+|B|-1$ ($\tilde 1s$ for $N=2^{22}$)
+ * Time: O(N \log N) with $N = |A|+|B|-1$ ($\tilde 1s$ for $N=2^{22}$)
  * Status: somewhat tested
  */
 #pragma once
@@ -44,7 +44,7 @@ vd conv(const vd& a, const vd& b) {
 	rep(i,0,sz(b)) in[i].imag(b[i]);
 	fft(in, rt, rev, n);
 	trav(x, in) x *= x;
-	rep(i,0,n) out[i] = in[(n - i) & (n - 1)] - conj(in[i]);
+	rep(i,0,n) out[i] = in[-i & (n - 1)] - conj(in[i]);
 	fft(out, rt, rev, n);
 	rep(i,0,sz(res)) res[i] = imag(out[i]) / (4*n);
 	return res;
