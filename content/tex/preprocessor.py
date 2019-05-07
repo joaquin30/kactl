@@ -53,22 +53,22 @@ def addref(caption, outstream):
     with open('header.tmp', 'a') as f:
         f.write(caption + "\n")
 
-def find_helper(source, start, subs):
-    first = (-1, 0)
-    for s in subs:
+COMMENT_TYPES = [
+    ('/**', '*/'),
+    ("'''", "'''"),
+    ('"""', '"""'),
+]
+
+def find_start_comment(source, start=None):
+    first = (-1, -1, None)
+    for s, e in COMMENT_TYPES:
         i = source.find(s, start)
         if i != -1 and (i < first[0] or first[0] == -1):
-            first = (i, len(s))
+            first = (i, i + len(s), e)
 
     return first
 
-def find_start_comment(source, start=None):
-    return find_helper(source, start, ['/**', "'''"])
-
-def find_end_comment(source, start=None):
-    return find_helper(source, start, ['*/', "'''"])
-
-def processwithcomments(caption, instream, outstream, listingslang = None):
+def processwithcomments(caption, instream, outstream, listingslang):
     knowncommands = ['Author', 'Date', 'Description', 'Source', 'Time', 'Memory', 'License', 'Status', 'Usage']
     requiredcommands = ['Author', 'Description']
     includelist = []
@@ -99,21 +99,21 @@ def processwithcomments(caption, instream, outstream, listingslang = None):
             includelist.append(include)
             continue
         nlines.append(line)
-    # Remove and process /** */ comments
+    # Remove and process multiline comments
     source = '\n'.join(nlines)
     nsource = ''
-    start, _ = find_start_comment(source)
+    start, start2, end_str = find_start_comment(source)
     end = 0
     commands = {}
     while start >= 0 and not error:
         nsource = nsource.rstrip() + source[end:start]
-        end, endlen = find_end_comment(source, start + 1)
+        end = source.find(end_str, start2)
         if end<start:
-            error = "Invalid /** */ comments."
+            error = "Invalid %s %s comments." % (source[start:start2], end_str)
             break
-        comment = source[start+3:end].strip()
-        end = end + endlen
-        start, _ = find_start_comment(source, end)
+        comment = source[start2:end].strip()
+        end += len(end_str)
+        start, start2, end_str = find_start_comment(source, end)
 
         commentlines = comment.split('\n')
         command = None
@@ -144,7 +144,7 @@ def processwithcomments(caption, instream, outstream, listingslang = None):
         nsource = nsource.rstrip() + source[end:]
     nsource = nsource.strip()
 
-    if not listingslang:
+    if listingslang in ['C++', 'Java']:
         hash_script = 'hash'
         p = subprocess.Popen(['sh', 'content/contest/%s.sh' % hash_script], stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         hsh, _ = p.communicate(nsource)
@@ -172,7 +172,7 @@ def processwithcomments(caption, instream, outstream, listingslang = None):
             out.append(r"\leftcaption{%s}" % pathescape(", ".join(includelist)))
         if nsource:
             out.append(r"\rightcaption{%s%d lines}" % (hsh, len(nsource.split("\n"))))
-        langstr = ", language="+listingslang if listingslang else ""
+        langstr = ", language="+listingslang
         out.append(r"\begin{lstlisting}[caption={%s}%s]" % (pathescape(caption), langstr))
         out.append(nsource)
         out.append(r"\end{lstlisting}")
@@ -262,7 +262,7 @@ def main():
             return
         print(" * \x1b[1m{}\x1b[0m".format(caption))
         if language == "cpp" or language == "cc" or language == "c" or language == "h" or language == "hpp":
-            processwithcomments(caption, instream, outstream)
+            processwithcomments(caption, instream, outstream, 'C++')
         elif language == "java":
             processwithcomments(caption, instream, outstream, 'Java')
         elif language == "ps":
