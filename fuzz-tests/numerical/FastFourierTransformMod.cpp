@@ -10,24 +10,13 @@ typedef long long ll;
 typedef pair<int, int> pii;
 typedef vector<int> vi;
 
+const ll mod = 1000000007;
 
-
-typedef vector<ll> vl;
-namespace ignore {
-#include "../../content/number-theory/ModPow.h"
-}
-ll modpow(ll a, ll e);
-#include "../../content/numerical/NumberTheoreticTransform.h"
-ll modpow(ll a, ll e) {
-	if (e == 0) return 1;
-	ll x = modpow(a * a % mod, e >> 1);
-	return e & 1 ? x * a % mod : x;
-}
-
+#include "../../content/numerical/FastFourierTransformMod.h"
 
 vl simpleConv(vl a, vl b) {
-	int s = sz(a) + sz(b) - 1;
 	if (a.empty() || b.empty()) return {};
+	int s = sz(a) + sz(b) - 1;
 	vl c(s);
 	rep(i,0,sz(a)) rep(j,0,sz(b))
 		c[i+j] = (c[i+j] + (ll)a[i] * b[j]) % mod;
@@ -44,17 +33,15 @@ int ra() {
 }
 
 int main() {
-	ll res = 0, res2 = 0;
-	int ind = 0, ind2 = 0;
 	vl a, b;
 	rep(it,0,6000) {
-		a.resize(ra() % 10);
-		b.resize(ra() % 10);
-		trav(x, a) x = (ra() % 100 - 50+mod)%mod;
-		trav(x, b) x = (ra() % 100 - 50+mod)%mod;
-		trav(x, simpleConv(a, b)) res += (ll)x * ind++ % mod;
-		trav(x, conv(a, b)) res2 += (ll)x * ind2++ % mod;
+		a.resize(ra() % 100);
+		b.resize(ra() % 100);
+		trav(x, a) x = ra() % mod;
+		trav(x, b) x = ra() % mod;
+		auto v1 = simpleConv(a, b);
+		auto v2 = convMod<mod>(a, b);
+		assert(v1 == v2);
 	}
-	assert(res==res2);
 	cout<<"Tests passed!"<<endl;
 }
