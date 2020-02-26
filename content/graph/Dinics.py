@@ -26,7 +26,7 @@ def dinics(graph, s, t):
             used += r
             cap[i][j] -= r
             cap[j][i] += r
-            if of - used == 0: break
+            if of == used: break
         return used
 
     flow = 0
