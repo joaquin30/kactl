@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p build
 FILE="$1"
 echo "
 #include \"../content/contest/template.cpp\"
