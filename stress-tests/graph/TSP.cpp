@@ -88,7 +88,7 @@ void test_time() {
 }
 
 signed main() {
-    test_correctness(1000);
+    test_correctness(500);
     test_time();
     cout << "Tests passed!" << endl;
 }
