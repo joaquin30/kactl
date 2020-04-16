@@ -3,19 +3,21 @@
  * Date: 2020-04-14
  * License: CC0
  * Description: Given a symmetric distance matrix, computes the minimum length of
- * a cycle that visits every node.
- * Time: O(2^n n^2). For n=21 $\approx 0.5s$. Runs 40\% faster if DP array is global.
+ * a cycle that visits every node exactly once.
+ * Time: O(2^n n^2). For n=22 $\approx 0.5s$.
  * Status: Stress-tested and tested on Kattis: toursdesalesforce
  */
 #pragma once
 
-const double INF = 1e12;
-#define repbits(bs, x) for(int y = bs, x; \
-  x = __builtin_ctz(y), y; y ^= y&-y)
-#define vt vector<T>
-template<class T> T TSP(const vector<vt>& C) {
+const int MAXN = 21; // 1 less than actual MAXN is fine
+using T = ll; // can also use double
+const T INF = 1e12;
+#define repbits(bs, x) \
+  for(int y = bs, x; x = __builtin_ctz(y), y; y ^= y&-y)
+T DP[1 << MAXN][MAXN];
+T TSP(const vector<vector<T>>& C) {
   int N = sz(C)-1, M = 1 << N;
-  vector<vt> DP(M, vt(N, INF));
+  rep(bs, 1, M) rep(i, 0, N) DP[bs][i] = INF;
   rep(i, 0, N) DP[1 << i][i] = C[i][N];
   rep(bs, 1, M) repbits(bs, j) {
     int nbs = bs ^ (1 << j);

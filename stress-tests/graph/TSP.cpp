@@ -13,6 +13,27 @@ vector<vd> make_cost(const vector<P>& ps) {
     return C;
 }
 
+namespace TSPD {
+    const int MAXN = 21; // 1 less than actual MAXN is fine
+    using T = double; // can also use double
+    const T INF = 1e12;
+    T DP[1 << MAXN][MAXN];
+    T TSP(const vector<vector<T>>& C) {
+      int N = sz(C)-1, M = 1 << N;
+      rep(bs, 1, M) rep(i, 0, N) DP[bs][i] = INF;
+      rep(i, 0, N) DP[1 << i][i] = C[i][N];
+      rep(bs, 1, M) repbits(bs, j) {
+        int nbs = bs ^ (1 << j);
+        repbits(nbs, i)
+          DP[bs][j] = min(DP[bs][j], DP[nbs][i] + C[i][j]);
+      }
+      T best = INF;
+      rep(i, 0, N) best = min(best, DP[M-1][i] + C[i][N]);
+      return best;
+    }
+}
+
+#define vt vector<T>
 template<class T> T naiveDP(const vector<vt>& C) {
     int N = sz(C), M = 1 << N;
     vector<vt> DP(M, vt(N, INF));
@@ -67,7 +88,7 @@ void test_correctness(int iters) {
         vector<P> ps(N);
         trav(p, ps) p.x = randIncl(-lim, lim), p.y = randIncl(-lim, lim);
         auto cost = make_cost(ps);
-        assert(fabs(TSP(cost) - perm(cost)) < 1e-7);
+        assert(fabs(TSPD::TSP(cost) - perm(cost)) < 1e-7);
     }
 }
 
