@@ -13,6 +13,23 @@ vector<vd> make_cost(const vector<P>& ps) {
     return C;
 }
 
+template<class T> T naiveDP(const vector<vt>& C) {
+    int N = sz(C), M = 1 << N;
+    vector<vt> DP(M, vt(N, INF));
+    DP[1][0] = 0;
+    rep(bs, 3, M) if (bs&1) {
+        rep(j, 1, N) if (bs & (1 << j)) {
+            int nbs = bs ^ (1 << j);
+            rep(i, 0, N) if (i != j && bs & (1 << i)) {
+                DP[bs][j] = min(DP[bs][j], DP[nbs][i] + C[i][j]);
+            }
+        }
+    }
+    T best = INF;
+    rep(i, 1, N) best = min(best, DP[M-1][i] + C[i][0]);
+    return best;
+}
+
 template<class T> T perm(const vector<vt>& C) {
     T best = INF;
     vi order(sz(C));
@@ -57,8 +74,16 @@ void test_correctness(int iters) {
 void test_time() {
     rep(N, 14, 23) {
         auto cost = matrix(N);
-        timeit t("TSP: N = " + to_string(N));
-        TSP(cost);
+        ll t1, t2;
+        {
+            timeit t("TSP: N = " + to_string(N));
+            t1 = TSP(cost);
+        }
+        {
+            timeit t("NDP: N = " + to_string(N));
+            t2 = naiveDP(cost);
+        }
+        assert(t1 == t2);
     }
 }
 
