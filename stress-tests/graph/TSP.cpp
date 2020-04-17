@@ -22,9 +22,9 @@ namespace TSPD {
       int N = sz(C)-1, M = 1 << N;
       rep(bs, 1, M) rep(i, 0, N) DP[bs][i] = INF;
       rep(i, 0, N) DP[1 << i][i] = C[i][N];
-      rep(bs, 1, M) repbits(bs, j) {
+      rep(bs, 1, M) repbits(j, bs) {
         int nbs = bs ^ (1 << j);
-        repbits(nbs, i)
+        repbits(i, nbs)
           DP[bs][j] = min(DP[bs][j], DP[nbs][i] + C[i][j]);
       }
       T best = INF;
@@ -70,7 +70,7 @@ template<class T> T perm(const vector<vt>& C) {
 using vl = vector<ll>;
 vector<vl> matrix(int N) {
     vector<vl> cost(N, vl(N));
-    rep(i, 0, N) rep(j, i + 1, N) cost[i][j] = cost[j][i] = randRange((int64_t)INF);
+    rep(i, 0, N) rep(j, i + 1, N) cost[i][j] = cost[j][i] = randRange((int64_t)INF/N);
     return cost;
 }
 
@@ -79,7 +79,8 @@ void test_correctness(int iters) {
         int N = randIncl(2, 10);
         // generate symmetric distance matrix
         auto cost = matrix(N);
-        assert(TSP(cost) == perm(cost));
+        auto c1 = TSP(cost), c2 = perm(cost);
+        assert(c1 == c2);
     }
 
     int64_t lim = 1 << 20;
@@ -109,7 +110,7 @@ void test_time() {
 }
 
 signed main() {
-    test_correctness(500);
+    test_correctness(200);
     test_time();
     cout << "Tests passed!" << endl;
 }
