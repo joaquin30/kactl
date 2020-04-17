@@ -3,17 +3,17 @@
  * Date: 2020-04-14
  * License: CC0
  * Description: Given a symmetric distance matrix, computes the min. length of
- * a tour beginning at ending at node N visiting all other nodes exactly once.
+ * a tour beginning and ending at node N visiting all other nodes exactly once.
  * Time: O(2^n n^2). For n=22 $\approx 0.5s$.
  * Status: Stress-tested and tested on Kattis: toursdesalesforce
  */
 #pragma once
 
 const int MAXN = 21; // 1 less than actual MAXN is fine
-using T = ll; // can also use double
+using T = long long; // can also use double
 const T INF = 1e12;
-#define repbits(x, bs) \
-  for(int x, y = bs; x = __builtin_ctz(y), y; y ^= y&-y)
+#define repbits(x, bs) for(int x, y = bs; \
+  y && ((x = __builtin_ctz(y)) || y); y ^= y&-y)
 T DP[1 << MAXN][MAXN];
 T TSP(const vector<vector<T>>& C) {
   int N = sz(C)-1, M = 1 << N;
