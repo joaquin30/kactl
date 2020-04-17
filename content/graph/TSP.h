@@ -10,7 +10,7 @@
 #pragma once
 
 const int MAXN = 21; // 1 less than actual MAXN is fine
-using T = long long; // can also use double
+using T = ll; // can also use double
 const T INF = 1e12;
 #define repbits(x, bs) for(int x, y = bs; \
   y && ((x = __builtin_ctz(y)) || y); y ^= y&-y)
