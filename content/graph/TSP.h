@@ -19,7 +19,7 @@ T TSP(const vector<vector<T>>& C) {
   int N = sz(C)-1, M = 1 << N;
   memset(&DP, 0, sizeof(DP));
   rep(i, 0, N) DP[1 << i][i] += DP[M-1][i] = C[i][N];
-  rep(bs, 3, M) if(bs ^ (bs&-bs)) repbits(j, bs) {
+  rep(bs, 3, M) if(__builtin_popcount(bs) > 1) repbits(j, bs) {
     int nbs = bs ^ (1 << j); T r = INF;
     repbits(i, nbs) r = min(r, DP[nbs][i] + C[i][j]);
     DP[bs][j] += r;
