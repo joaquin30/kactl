@@ -5,6 +5,9 @@
 
 #include "../../content/graph/TSP.h"
 
+#define trav(a, b) for(auto& a : b)
+// TODO: Make tests with assymetric distance matrices
+
 using vd = vector<double>;
 using P = Point<ll>;
 vector<vd> make_cost(const vector<P>& ps) {
