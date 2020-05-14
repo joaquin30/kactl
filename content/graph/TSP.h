@@ -5,7 +5,7 @@
  * Description: Given a distance matrix, computes the min. length of
  * a tour/path beginning (and ending) at node N visiting all other nodes exactly once.
  * Time: O(2^n n^2). For n=22 $\approx 0.5s$.
- * Status: Stress-tested and tested on Kattis: toursdesalesforce
+ * Status: Stress-tested and tested on Kattis: toursdesalesforce, supermario169
  */
 #pragma once
 
