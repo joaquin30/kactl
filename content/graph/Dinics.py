@@ -31,13 +31,13 @@ def dinics(graph, s, t):
 
     flow = 0
     while True:
-        level = [None] * N
+        level = [-1] * N
         level[s], Q = 0, deque([s])
         while Q:
             i = Q.popleft()
             if i == t: break
             for j, c in cap[i].items():
-                if level[j] is None and c:
+                if level[j] == -1 and c:
                     level[j] = level[i] + 1
                     Q.append(j)
         else: return flow, cap
