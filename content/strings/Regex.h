@@ -9,11 +9,14 @@
 
 #include <regex.h> /** keep-include */
 
-string pattern = "a*";
-regex_t re{};
-re.fastmap = (char *)malloc(256);
-re_compile_pattern(pattern.data(), sz(pattern), &re);
-string S = "aaa";
-int matched = re_match(&re, S.data(), sz(S), 0, nullptr);
-int i = re_search(&re, S.data(), sz(S), 0, sz(S), nullptr);
-regfree(&re);
+struct Regex {
+	regex_t re;
+	Regex(const string & p) { assert(regcomp(&re, p.data(), 0) == 0); }
+	~Regex() { regfree(&re); }
+	bool search(const string & s, pii & res) {
+		regmatch_t m;
+		if (regexec(&re, s.data(), 1, &m, 0)) return false;
+		res.first = m.rm_so; res.second = m.rm_eo;
+		return true;
+	}
+};
