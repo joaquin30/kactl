@@ -10,7 +10,7 @@
  * Status: Tested on SPOJ STABLEMP
  */
 bool prefers(const vi & prefs, int a1, int a2) {
-  trav(a, prefs) {
+  for(int a : prefs) {
     if (a == a1) return true;
     if (a == a2) return false;
   }
@@ -25,7 +25,7 @@ vi stable_marriage(const vector<vi> & A, const vector<vi> & B) {
   while (!unmatched.empty()) {
     int a = unmatched.front();
     unmatched.pop();
-    trav(b, A[a]) {
+    for(int b : A[a]) {
       int a2 = B_to_A[b];
       if (a2 == -1) {
         B_to_A[b] = a;
@@ -45,7 +45,7 @@ bool is_stable(const vector<vi> & A, const vector<vi> & B, const vi & B_to_A) {
   int N = sz(A);
   rep(b, 0, N) {
     int a = B_to_A[b];
-    trav(b2, A[a]) {
+    for(int b2 : A[a]) {
       if (b2 == b) break;
       if (prefers(A[a], b2, b) && prefers(B[b2], a, B_to_A[b2]))
         return false;
