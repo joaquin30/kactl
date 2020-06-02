@@ -16,14 +16,14 @@ T polyhedronVolume6(const vector<vector<Point3D<T>>> & faces) {
 	T volume = 0;
 	Point3D<T> center;
 	set<Point3D<T>> vertices;
-	trav(face, faces) trav(p, face) {
+	for(auto& face : faces) for(auto& p : face) {
 		if (!vertices.count(p)) {
 			center = center + p;
 			vertices.insert(p);
 		}
 	}
 	center = center / sz(vertices);
-	trav(f, faces) {
+	for(auto& f : faces) {
 		rep(i, 1, sz(f) - 1) {
 			auto normal = (f[i] - f[0]).cross(f[i+1] - f[0]);
 			T s = normal.dot(center - f[0]) < 0? 1: -1;
