@@ -13,9 +13,8 @@ sys.setrecursionlimit(1<<30)
 
 def dinics(graph, s, t):
     assert s != t
-    N, cap = len(graph), []
-    for i, adj in enumerate(graph):
-        cap.append(defaultdict(int, adj))
+    N = len(graph)
+    cap = [defaultdict(int, adj) for adj in graph]
 
     def augment(i, of):
         if i == t: return of
