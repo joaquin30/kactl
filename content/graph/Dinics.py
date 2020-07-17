@@ -3,12 +3,12 @@
  * Date: 2019-04-04
  * License: CC0
  * Description: Maximum flow. Very fast in practice.
-	To obtain the actual flow, compare input and output capacities.
+	To obtain edge flows, compare input and output capacities and discard negative values.
  * Status: Tested on Kattis: maxflow, mincut, frozenrose, mazemovement
- * Time: $O(V^2E)$
+ * Time: $O(V^2E)$. $O(\sqrt{V}E)$ for bipartite matching.
 '''
 import sys
-from collections import deque, defaultdict
+from collections import defaultdict
 sys.setrecursionlimit(1<<30)
 
 def dinics(graph, s, t):
@@ -31,9 +31,8 @@ def dinics(graph, s, t):
     flow = 0
     while True:
         level = [-1] * N
-        level[s], Q = 0, deque([s])
-        while Q:
-            i = Q.popleft()
+        level[s], Q = 0, [s]
+        for i in Q:
             if i == t: break
             for j, c in cap[i].items():
                 if level[j] == -1 and c:
