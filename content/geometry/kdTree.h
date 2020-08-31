@@ -2,39 +2,47 @@
  * Author: Stanford
  * Date: Unknown
  * Source: Stanford Notebook
- * Description: KD-tree (2d, can be extended to 3d)
+ * Description: KD-tree (any dimension)
  * Status: Tested on excellentengineers
  */
 #pragma once
 
-#include "Point.h"
-
-typedef long long T;
-typedef Point<T> P;
+using T = long long;
+constexpr int DIM = 2;
+using P = array<T, DIM>;
 const T INF = numeric_limits<T>::max();
-
-bool on_x(const P& a, const P& b) { return a.x < b.x; }
-bool on_y(const P& a, const P& b) { return a.y < b.y; }
 
 struct Node {
 	P pt; // if this is a leaf, the single point in it
-	T x0 = INF, x1 = -INF, y0 = INF, y1 = -INF; // bounds
+	P lo_bound, hi_bound;
 	Node *first = 0, *second = 0;
 
 	T distance(const P& p) { // min squared distance to a point
-		T x = (p.x < x0 ? x0 : p.x > x1 ? x1 : p.x);
-		T y = (p.y < y0 ? y0 : p.y > y1 ? y1 : p.y);
-		return (P(x,y) - p).dist2();
+		T r = 0;
+		rep(i, 0, DIM) {
+			T d = p[i] - max(lo_bound[i], min(hi_bound[i], p[i]));
+			r += d * d;
+		}
+		return r;
 	}
 
 	Node(vector<P>&& vp) : pt(vp[0]) {
-		for (P p : vp) {
-			x0 = min(x0, p.x); x1 = max(x1, p.x);
-			y0 = min(y0, p.y); y1 = max(y1, p.y);
+		rep(i, 0, DIM) {
+			lo_bound[i] = INF; hi_bound[i] = -INF;
 		}
-		if (vp.size() > 1) {
+		for (const P & p : vp) {
+			rep(i, 0, DIM) {
+				lo_bound[i] = min(lo_bound[i], p[i]);
+				hi_bound[i] = max(hi_bound[i], p[i]);
+			}
+		}
+		if (sz(vp) > 1) {
 			// split on x if width >= height (not ideal...)
-			sort(all(vp), x1 - x0 >= y1 - y0 ? on_x : on_y);
+			pair<T, int> biggest = {-1, -1};
+			rep(i, 0, DIM)
+				biggest = max(biggest, {hi_bound[i] - lo_bound[i], i});
+			int i = biggest.second;
+			sort(all(vp), [&](const P& a, const P& b){ return a[i] < b[i]; });
 			// divide by taking half the array for each child (not
 			// best performance with many duplicates in the middle)
 			int half = sz(vp)/2;
@@ -52,7 +60,7 @@ struct KDTree {
 		if (!node->first) {
 			// uncomment if we should not find the point itself:
 			// if (p == node->pt) return {INF, P()};
-			return make_pair((p - node->pt).dist2(), node->pt);
+			return {node->distance(p), node->pt};
 		}
 
 		Node *f = node->first, *s = node->second;
