@@ -2,7 +2,7 @@
  * Author: Asger Hautop Drewsen
  * Date: 2017-09-29
  * License: CC0
- * Description: Can use following special characters: \texttt{\^\$.*?|()\{\}}
+ * Description: You can use the following special characters: \texttt{\^{}\$.*?|()\{\}}
  * Time: O(NM)
  */
 #pragma once
