@@ -1,3 +1,48 @@
+# (AU-)KACTL
+
+This repository contains a fork of KACTL (more info below).
+
+Some of the content has been excluded to make room for new algorithms. This fork also includes some algorithms implemented in Python, as well as a useful template for Python in programming competitions.
+
+The lists below summarize major differences between our fork and the original version.
+
+Additions:
+
+* Table of contents
+* `contest/template.py`
+* `combinatorial/inversions.h`
+* `geometry/FarthestPair.h`
+* `geometry/LinePlaneIntersection.h`
+* `geometry/LineSphereIntersection.h`
+* `geometry/PolyhedronVolume6.h`
+* `geometry/SegmentSegmentDistance.h`
+* `geometry/kdTree.h` (generalized to **n** dimensions)
+* `graph/Dinics.py`
+* `graph/StableMarriage.h`
+* `graph/TSP.h`
+* `number-theory/CRT.py`
+* `number-theory/Rational.h`
+* `strings/Regex.h`
+* `various/Hashable.h`
+* `various/LCS.h`
+* `various/LIS.py`
+
+Exclusions:
+
+* `various/Euclid.java`
+* `various/FastMod.h`
+* `various/FastInput.h`
+* `various/SmallPtr.h`
+* `various/BumpAllocatorSTL.h`
+* `various/SIMD.h`
+* `appendix/techniques.txt`
+
+In addition to the above some descriptions are improved and the layout is slightly changed (in e.g. the geometry section). Changes to the original KACTL are regularly merged into this fork.
+
+Contributions are welcome.
+
+The rest of this README contains the unmodified content of the upstream (KTH KACTL) README.
+
 # KACTL
 
 This repo hosts KACTL, [KTH](https://en.wikipedia.org/wiki/KTH_Royal_Institute_of_Technology)'s ICPC team reference document.
