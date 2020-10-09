@@ -29,7 +29,7 @@ Additions:
 
 Exclusions:
 
-* `various/Euclid.java`
+* `number-theory/Euclid.java`
 * `various/FastMod.h`
 * `various/FastInput.h`
 * `various/SmallPtr.h`
