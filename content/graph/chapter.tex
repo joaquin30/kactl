@@ -6,9 +6,6 @@
 	\kactlimport{TopoSort.h}
 	\kactlimport{TSP.h}
 
-\section{Euler walk}
-	\kactlimport{EulerWalk.h}
-
 \section{Network flow}
 	\kactlimport{PushRelabel.h}
 	\kactlimport{MinCostMaxFlow.h}
@@ -31,6 +28,10 @@
 	\kactlimport{SCC.h}
 	\kactlimport{BiconnectedComponents.h}
 	\kactlimport{2sat.h}
+	\kactlimport{EulerWalk.h}
+
+\section{Coloring}
+	\kactlimport{EdgeColoring.h}
 
 \section{Heuristics}
 	\kactlimport{MaximalCliques.h}
@@ -61,6 +62,6 @@
 
 	\subsection{Erdős–Gallai theorem}
 		% Source: https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93Gallai_theorem
-		% Test: stress-tests/graph/matrix-tree.cpp
+		% Test: stress-tests/graph/erdos-gallai.cpp
 		A simple graph with node degrees $d_1 \ge \dots \ge d_n$ exists iff $d_1 + \dots + d_n$ is even and for every $k = 1\dots n$,
 		\[ \sum _{i=1}^{k}d_{i}\leq k(k-1)+\sum _{i=k+1}^{n}\min(d_{i},k). \]
