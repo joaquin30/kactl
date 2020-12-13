@@ -1,4 +1,9 @@
-from __future__ import division, print_function
-input = raw_input
-range = xrange
-from itertools import izip as zip, imap as map, ifilter as filter
+'''
+ * Author: Oskar Haarklou Veileborg
+ * Description: Fast I/O. Improves performance when reading many ($\geq 10^4$) lines.
+	Returns an empty string instead of raising EOFError!
+'''
+import sys
+input = lambda: sys.stdin.readline().rstrip('\r\n')
+# Many calls to print is also slow, consider:
+print('\n'.join(buffered_output))

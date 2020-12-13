@@ -4,8 +4,8 @@
  * License: Boost Software License
  * Source: https://codeforces.com/blog/entry/48868
  * Description: Returns the two points with max distance on a convex hull (ccw,
- * no duplicate/colinear points).
- * Status: Stress-tested, submitted on kattis roberthood
+ * no duplicate/collinear points).
+ * Status: stress-tested, tested on kattis:roberthood
  */
 #pragma once
 #include "Point.h"
