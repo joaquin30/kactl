@@ -1,3 +1,4 @@
+#!/usr/bin/env python3.9
 from math import lcm
 from pathlib import Path
 

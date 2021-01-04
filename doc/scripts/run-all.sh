@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 DIR=${1:-.}
-tests="$(find $DIR/stress-tests -name '*.cpp')"
+tests="$(find $DIR/stress-tests -name '*.cpp' -or -name '*.py')"
 declare -i pass=0
 declare -i fail=0
 failTests=""
@@ -8,7 +8,12 @@ ulimit -s 524288 # For 2-sat test
 for test in $tests; do
     echo "$(basename $test): "
     start=`date +%s.%N`
-    g++ -std=c++17 -O2 $test && ./a.out
+    if [[ $test =~ .*\.py$ ]]; then
+        # Shebang line specifies the Python version
+        $test
+    else
+        g++ -std=c++17 -O2 $test && ./a.out
+    fi
     retCode=$?
     if (($retCode != 0)); then
         echo "Failed with $retCode"
