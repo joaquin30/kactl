@@ -27,3 +27,8 @@ def test_crt(args):
 
     x2 = crt(rem, mod)
     assert x == x2
+
+
+if __name__ == "__main__":
+    test_crt()
+    print("Tests passed!")
