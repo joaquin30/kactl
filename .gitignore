@@ -4,3 +4,5 @@
 a.out
 header.tmp
 .vscode
+__pycache__/
+.hypothesis/
