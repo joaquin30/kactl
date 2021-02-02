@@ -1,8 +1,9 @@
 /**
  * Author: Asger Hautop Drewsen
  * Date: 2021-02-02
- * Description: Calculates the chromatic number of an undirected graph.
  * License: CC0
+ * Description: Calculates the chromatic number of an undirected graph.
+ * Time: $O(2.4422^n)$
  * Status: Tested on committeeassignment
  */
 #include "MaximalCliques.h"
