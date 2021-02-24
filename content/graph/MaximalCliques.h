@@ -22,7 +22,7 @@ void cliques(vector<B>& eds, F f, B P = ~B(), B X={}, B R={}) {
 	if (!P.any()) { if (!X.any()) f(R); return; }
 	auto q = (P | X)._Find_first();
 	auto cands = P & ~eds[q];
-	for (int i = cands._Find_first(); i != sz(cands);
+	for (int i = cands._Find_first(); i < sz(eds);
 	 i = cands._Find_next(i)) {
 		R[i] = 1;
 		cliques(eds, f, P & eds[i], X & eds[i], R);
