@@ -6,21 +6,20 @@
  * being $N \times N$ matrices and \texttt{A[a]} being the ordered list of B's
  * according to \texttt{a}'s preference and similarly for \texttt{B[b]}.
  * \text{b} and \texttt{B\_to\_A[b]} are matched up.
- * $O(N^2)$
+ * Time: $O(N^2)$
  * Status: Tested on SPOJ STABLEMP
  */
-bool prefers(const vi & prefs, int a1, int a2) {
-  for(int a : prefs) {
-    if (a == a1) return true;
-    if (a == a2) return false;
-  }
-  return false;
+using vvi = vector<vi>;
+vvi prefer_rank(const vvi& B) {
+  int N = sz(B); vvi res(N, vi(N));
+  rep(b, 0, N) rep(i, 0, N) res[b][B[b][i]] = i;
+  return res;
 }
-
-vi stable_marriage(const vector<vi> & A, const vector<vi> & B) {
+vi stable_marriage(const vvi& A, const vvi& B) {
   int N = sz(A);
   queue<int> unmatched;
   vi B_to_A(N, -1);
+  auto prefer_B = prefer_rank(B);
   rep(a, 0, N) unmatched.push(a);
   while (!unmatched.empty()) {
     int a = unmatched.front();
@@ -31,7 +30,7 @@ vi stable_marriage(const vector<vi> & A, const vector<vi> & B) {
         B_to_A[b] = a;
         break;
       }
-      if (prefers(B[b], a, a2)) {
+      if (prefer_B[b][a] < prefer_B[b][a2]) {
         unmatched.push(a2);
         B_to_A[b] = a;
         break;
@@ -40,14 +39,16 @@ vi stable_marriage(const vector<vi> & A, const vector<vi> & B) {
   }
   return B_to_A;
 }
-
-bool is_stable(const vector<vi> & A, const vector<vi> & B, const vi & B_to_A) {
+bool is_stable(const vvi& A, const vvi& B, const vi& B_to_A) {
   int N = sz(A);
+  auto prefer_A = prefer_rank(A);
+  auto prefer_B = prefer_rank(B);
   rep(b, 0, N) {
     int a = B_to_A[b];
     for(int b2 : A[a]) {
       if (b2 == b) break;
-      if (prefers(A[a], b2, b) && prefers(B[b2], a, B_to_A[b2]))
+      if (prefer_A[a][b2] < prefer_A[a][b] &&
+          prefer_B[b2][a] < prefer_B[b2][B_to_A[b2]])
         return false;
     }
   }
