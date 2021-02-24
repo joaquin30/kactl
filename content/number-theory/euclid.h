@@ -12,7 +12,7 @@ ll gcd(ll a, ll b) { return __gcd(a, b); }
 ll lcm(ll a, ll b) { return abs(a) / gcd(a, b) * abs(b); }
 
 ll euclid(ll a, ll b, ll &x, ll &y) {
-	if (b) { ll d = euclid(b, a % b, y, x);
-		return y -= a/b * x, d; }
-	return x = 1, y = 0, a;
+	if (!b) return x = 1, y = 0, a;
+	ll d = euclid(b, a % b, y, x);
+	return y -= a/b * x, d;
 }
