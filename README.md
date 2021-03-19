@@ -11,6 +11,7 @@ Additions:
 * Table of contents
 * `contest/template.py`
 * `combinatorial/inversions.h`
+* `data-structures/InverseSegmentTree.h`
 * `geometry/FarthestPair.h`
 * `geometry/LinePlaneIntersection.h`
 * `geometry/LineSphereIntersection.h`
@@ -20,6 +21,7 @@ Additions:
 * `graph/Dinics.py`
 * `graph/StableMarriage.h`
 * `graph/TSP.h`
+* `graph/VertexColoring.h`
 * `number-theory/CRT.py`
 * `number-theory/Rational.h`
 * `strings/Regex.h`
