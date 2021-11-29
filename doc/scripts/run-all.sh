@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 DIR=${1:-.}
+
+# use a precompiled header for the template to improve perf
+g++ -Wall -Wfatal-errors -Wconversion -std=c++17 -O2 $DIR/stress-tests/utilities/template.h
+trap "rm -f $DIR/stress-tests/utilities/template.h.gch" EXIT
+
 tests="$(find $DIR/stress-tests -name '*.cpp' -or -name '*.py')"
 declare -i pass=0
 declare -i fail=0
@@ -12,7 +17,7 @@ for test in $tests; do
         # Shebang line specifies the Python version
         $test
     else
-        g++ -std=c++17 -O2 $test && ./a.out
+        g++ -Wall -Wfatal-errors -Wconversion -std=c++17 -O2 $test && ./a.out
     fi
     retCode=$?
     if (($retCode != 0)); then
