@@ -12,7 +12,6 @@ Additions:
 * `contest/template.py`
 * `combinatorial/inversions.h`
 * `data-structures/InverseSegmentTree.h`
-* `geometry/FarthestPair.h`
 * `geometry/LinePlaneIntersection.h`
 * `geometry/LineSphereIntersection.h`
 * `geometry/PolyhedronVolume6.h`
