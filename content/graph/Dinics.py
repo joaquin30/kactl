@@ -4,7 +4,7 @@
  * License: CC0
  * Description: Maximum flow. Very fast in practice.
 	To obtain edge flows, compare input and output capacities and discard negative values.
- * Status: Tested on Kattis: maxflow, mincut, frozenrose, mazemovement
+ * Status: Tested on Kattis: gravamen, jupiter, (previous ver: maxflow, mincut, frozenrose, mazemovement)
  * Time: $O(V^2E)$. $O(\sqrt{V}E)$ for bipartite matching.
 '''
 import sys
@@ -18,18 +18,20 @@ def dinics(graph, s, t):
 
     def augment(i, of):
         if i == t: return of
-        used = 0
-        for j, c in cap[i].items():
-            if level[j] != level[i] + 1 or not c: continue
+        used, v = 0, valid[i]
+        while v and used < of:
+            j = v.pop(); c = cap[i][j]
+            if not c: continue  # TODO: Impossible?
             r = augment(j, min(of - used, c))
             used += r
             cap[i][j] -= r
             cap[j][i] += r
-            if of == used: break
+            if 0 < r < c: v.append(j)
         return used
 
     flow = 0
     while True:
+        valid = [[] for _ in range(N)]
         level = [-1] * N
         level[s], Q = 0, [s]
         for i in Q:
@@ -38,5 +40,7 @@ def dinics(graph, s, t):
                 if level[j] == -1 and c:
                     level[j] = level[i] + 1
                     Q.append(j)
+                if level[i] + 1 == level[j] and c:
+                    valid[i].append(j)
         else: return flow, cap
         flow += augment(s, float('inf'))
