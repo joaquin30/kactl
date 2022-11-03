@@ -21,7 +21,6 @@ def dinics(graph, s, t):
         used, v = 0, valid[i]
         while v and used < of:
             j = v.pop(); c = cap[i][j]
-            if not c: continue  # TODO: Impossible?
             r = augment(j, min(of - used, c))
             used += r
             cap[i][j] -= r
