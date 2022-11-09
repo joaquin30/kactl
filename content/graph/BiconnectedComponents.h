@@ -8,6 +8,8 @@
  *  are at least two distinct paths between any two nodes. Note that a node can
  *  be in several components. An edge which is not in a component is a bridge,
  *  i.e., not part of any cycle.
+ *  An articulation point (cut vertex) is in at least 2 components or touches a
+ *  bridge edge and has at least 2 neighbours.
  * Usage:
  *  int eid = 0; ed.resize(N);
  *  for each edge (a,b) {
