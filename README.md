@@ -11,7 +11,9 @@ Additions:
 * Table of contents
 * `contest/template.py`
 * `combinatorial/inversions.h`
-* `data-structures/InverseSegmentTree.h`
+* `data-structures/InverseSegmentTree.h` (excluded by default)
+* `data-structures/PersistentSegmentTree.h` (excluded by default)
+* `data-structures/WaveletTree.h` (excluded by default)
 * `geometry/LinePlaneIntersection.h`
 * `geometry/LineSphereIntersection.h`
 * `geometry/PolyhedronVolume6.h`
