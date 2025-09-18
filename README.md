@@ -23,6 +23,7 @@ Additions:
 * `graph/StableMarriage.h`
 * `graph/TSP.h`
 * `graph/VertexColoring.h`
+* `graph` Steiner Tree
 * `number-theory/CRT.py`
 * `number-theory/Rational.h`
 * `strings/Regex.h`
