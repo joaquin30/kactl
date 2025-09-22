@@ -17,7 +17,7 @@ typedef unsigned long long ull;
 struct FastMod {
 	ull b, m;
 	FastMod(ull b) : b(b), m(-1ULL / b) {}
-	ull apprx(ull a) { return __uint128_t(m) * a >> 64; }
+	ull apprx(ull a) { return ull(__uint128_t(m) * a >> 64); }
 	ull div(ull a) { ull q = apprx(a); return q+(a - q*b >= b); }
 	ull mod(ull a) { return a - apprx(a) * b; } // in [0, 2b)
 };
