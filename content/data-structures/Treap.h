@@ -27,15 +27,15 @@ template<class F> void each(Node* n, F f) {
 pair<Node*, Node*> split(Node* n, int k) {
 	if (!n) return {};
 	if (cnt(n->l) >= k) { // "n->val >= k" for lower_bound(k)
-		auto pa = split(n->l, k);
-		n->l = pa.second;
+		auto [L,R] = split(n->l, k);
+		n->l = R;
 		n->recalc();
-		return {pa.first, n};
+		return {L, n};
 	} else {
-		auto pa = split(n->r, k - cnt(n->l) - 1); // and just "k"
-		n->r = pa.first;
+		auto [L,R] = split(n->r,k - cnt(n->l) - 1); // and just "k"
+		n->r = L;
 		n->recalc();
-		return {n, pa.second};
+		return {n, R};
 	}
 }
 
@@ -44,18 +44,16 @@ Node* merge(Node* l, Node* r) {
 	if (!r) return l;
 	if (l->y > r->y) {
 		l->r = merge(l->r, r);
-		l->recalc();
-		return l;
+		return l->recalc(), l;
 	} else {
 		r->l = merge(l, r->l);
-		r->recalc();
-		return r;
+		return r->recalc(), r;
 	}
 }
 
 Node* ins(Node* t, Node* n, int pos) {
-	auto pa = split(t, pos);
-	return merge(merge(pa.first, n), pa.second);
+	auto [l,r] = split(t, pos);
+	return merge(merge(l, n), r);
 }
 
 // Example application: move the range [l, r) to index k

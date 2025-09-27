@@ -51,9 +51,24 @@
 	\kactlimport{LinkCutTree.h}
 	%\columnbreak
 	\kactlimport{DirectedMST.h}
-\section{Tree diameter}
-	Given an unrooted tree the longest path between two nodes in the tree is the diameter. To find it do BFS from an arbitrary node and pick a node farthest away. Do BFS from this node and the size of the longest path is the diameter.
-	%\hardcolumnbreak
+
+    \subsection{Tree diameter}
+        Given an unrooted tree the longest path between two nodes in the tree is the diameter. To find it do BFS from an arbitrary node and pick a node farthest away. Do BFS from this node and the size of the longest path is the diameter.
+        %\hardcolumnbreak
+
+    \subsection{Steiner Tree}
+        Given a weighted graph and a subset $T$ of nodes (terminals), find a
+        minimum-weight tree that contains all terminals.
+        Compute with DP $\text{W}(S, v)$: weight of a minimum-weight tree
+        containing all nodes in $S \subseteq T$ and $v \in V$.
+        \begin{align*}
+            \text{W}(\emptyset, v) &= 0 \\
+            \text{W}(S, v) &\leq \text{W}(D, v) + \text{W}(S \setminus D, v) &
+            \forall D \subset S \\
+            \text{W}(S, v) &\leq \text{W}(S \setminus \{v\}, v) & \text{if } v \in S \\
+            \text{W}(S, v) &\leq \text{W}(S, u) + w(u, v) & \forall (u, v) \in E
+        \end{align*}
+        {\small \textbf{Time:} $\mathcal{O}(3^T V + 2^T E \log V)$}
 
 \section{Math}
 	\subsection{Number of Spanning Trees}
