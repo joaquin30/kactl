@@ -9,31 +9,33 @@
  * Time: $O(n \log n)$
  * Status: Tested at CodeForces
  */
+
+const int MAXN = 2e5+10;
 vector<vi> adj;
-bool tk[MAXN];
+bool del[MAXN];
 int par[MAXN]; // parent in centroid decomposition
 int szt[MAXN]; // size of subtree
-int calcsz(int x, int f) {
-	szt[x] = 1;
-	for (auto y : adj[x]) 
-		if (y != f && !tk[y])
-			szt[x] += calcsz(y, x);
-	return szt[x];
+int calcsz(int u, int p) {
+    szt[u] = 1;
+    for (int v : adj[u]) if (v != p && !del[v])
+        szt[u] += calcsz(v, u);
+    return szt[u];
 }
-void cdfs(int x = 0, int f = -1, int sze = -1) { // O(nlogn)
-	if (sze < 0) sze = calcsz(x, -1);
-	for (auto y : adj[x]) {
-		if (!tk[y] && szt[y] * 2 >= sze) {
-			szt[x] = 0;
-			cdfs(y, f, sze);
-			return;
-		}
-	}
-	tk[x] = true;
-	par[x] = f;
-	for (auto y : adj[x]) if (!tk[y]) cdfs(y, x);
+void cdfs(int u = 0, int p = -1, int szu = -1) {
+    if (szu < 0) szu = calcsz(u, -1);
+    for (int v : adj[u]) {
+        if (!del[v] && szt[v] * 2 >= szu) {
+            szt[u] = 0;
+            cdfs(v, p, szu);
+            return;
+        }
+    }
+    del[u] = true;
+    par[u] = p;
+    // process centroid u
+    for (int v : adj[u]) if (!del[v]) cdfs(v, u);
 }
 void centroid() {
-	memset(tk, false, sizeof(tk));
+	memset(del, false, sizeof(del));
 	cdfs();
 }
