@@ -35,6 +35,7 @@ struct Node {
 	}
 	void set(int L, int R, int x) {
 		if (R <= lo || hi <= L) return;
+		// mset = x, val = x * (hi - lo) for sums
 		if (L <= lo && hi <= R) mset = val = x, madd = 0;
 		else {
 			push(), l->set(L, R, x), r->set(L, R, x);
@@ -46,6 +47,7 @@ struct Node {
 		if (L <= lo && hi <= R) {
 			if (mset != inf) mset += x;
 			else madd += x;
+			// val += x * (hi - lo) for sums
 			val += x;
 		}
 		else {

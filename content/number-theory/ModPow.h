@@ -19,3 +19,4 @@ ll modpow(ll b, ll e) {
 		if (e & 1) ans = ans * b % mod;
 	return ans;
 }
+ll inv(ll x) { return modpow(x, mod-2); }

@@ -19,7 +19,7 @@
 	\kactlimport{euclid.h}
 	%\kactlimport{Euclid.java}
 	\kactlimport{CRT.h}
-	\kactlimport{CRT.py}
+	%\kactlimport{CRT.py}
 
 	\subsection{Bézout's identity}
 	For $a \neq $, $b \neq 0$, then $d=gcd(a,b)$ is the smallest positive integer for which there are integer solutions to
@@ -62,6 +62,10 @@
 
   $ \sum_{d | n} \mu(d) = [ n = 1] $ (very useful)
 
+  $ [\gcd(x,y)] = \sum_{d|x, d|y} \mu(d) $
+
   $ g(n) = \sum_{n|d} f(d) \Leftrightarrow f(n) = \sum_{n|d} \mu(d/n)g(d)$
 
- $ g(n) = \sum_{1 \leq m \leq n} f(\left\lfloor\frac{n}{m}\right \rfloor ) \Leftrightarrow f(n) = \sum_{1\leq m\leq n} \mu(m)g(\left\lfloor\frac{n}{m}\right\rfloor)$
+  $ g(n) = \sum_{1 \leq m \leq n} f(\left\lfloor\frac{n}{m}\right \rfloor ) \Leftrightarrow f(n) = \sum_{1\leq m\leq n} \mu(m)g(\left\lfloor\frac{n}{m}\right\rfloor)$
+ 	
+	\kactlimport{Mobius.h}
