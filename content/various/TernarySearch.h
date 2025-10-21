@@ -25,3 +25,14 @@ int ternSearch(int a, int b, F f) {
 	rep(i,a+1,b+1) if (f(a) < f(i)) a = i; // (B)
 	return a;
 }
+template<class F>
+double ternSearch(double a, double b, F f) {
+	assert(a <= b);
+	rep(i,0,100) {
+		double m1 = (2.0 * a + b) / 3.0;
+		double m2 = (a + 2.0 * b) / 3.0;
+		if (f(m1) < f(m2)) a = m1; // (A)
+		else b = m2;
+	}
+	return a;
+}
