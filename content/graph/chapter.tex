@@ -50,11 +50,6 @@
 	\kactlimport{HLD.h}
 	\kactlimport{LinkCutTree.h}
 	%\columnbreak
-	\kactlimport{DirectedMST.h}
-
-    \subsection{Tree diameter}
-        Given an unrooted tree the longest path between two nodes in the tree is the diameter. To find it do BFS from an arbitrary node and pick a node farthest away. Do BFS from this node and the size of the longest path is the diameter.
-        %\hardcolumnbreak
 
     \subsection{Steiner Tree}
         Given a weighted graph and a subset $T$ of nodes (terminals), find a
@@ -69,6 +64,13 @@
             \text{W}(S, v) &\leq \text{W}(S, u) + w(u, v) & \forall (u, v) \in E
         \end{align*}
         {\small \textbf{Time:} $\mathcal{O}(3^T V + 2^T E \log V)$}
+
+    \subsection{Tree diameter}
+        Given an unrooted tree the longest path between two nodes in the tree is the diameter. To find it do BFS from an arbitrary node and pick a node farthest away. Do BFS from this node and the size of the longest path is the diameter.
+        
+	% \hardcolumnbreak
+
+	\kactlimport{DirectedMST.h}
 
 \section{Math}
 	\subsection{Number of Spanning Trees}

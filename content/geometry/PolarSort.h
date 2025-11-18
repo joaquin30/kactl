@@ -8,13 +8,14 @@
  * Status: Unknown
  */
 
-bool half(pt p) {
+typedef Point<ll> P;
+bool half(P p) {
 	assert(p.x != 0 || p.y != 0);
 	return p.y > 0 || (p.y == 0 && p.x < 0);
 }
-void polarSort(vector<pt> &v, pt o) {
-	sort(all(v), [](pt v, pt w) {
-		return make_tuple(half(v-o), 0)) <
+void polarSort(vector<P> &v, P o) {
+	sort(all(v), [](P v, P w) {
+		return make_tuple(half(v-o), 0) <
 			make_tuple(half(w-o), (v-o).cross(w-o));
 	});
 }
