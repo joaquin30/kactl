@@ -11,22 +11,31 @@
  */
 #pragma once
 
-vector<vi> treeJump(vi& P){
-	int on = 1, d = 1;
-	while(on < sz(P)) on *= 2, d++;
-	vector<vi> jmp(d, P);
-	rep(i,1,d) rep(j,0,sz(P))
-		jmp[i][j] = jmp[i-1][jmp[i-1][j]];
-	return jmp;
+vector<vi> adj, tbl;
+vi depth;
+
+void dfs(int v, int p) {
+	depth[v] = depth[p] + 1;
+	tbl[0][v] = p;
+	rep(i,1,sz(tbl)) tbl[i][v] = tbl[i-1][tbl[i-1][v]];
+	for (int u : adj[v]) if (u != p) dfs(u, v);
 }
 
-int jmp(vector<vi>& tbl, int nod, int steps){
+void binLifting(int root) {
+	int on = 1, d = 1, n = sz(adj);
+	while (on < n) on *= 2, d++;
+	tbl.assign(d, vi(n));
+	depth.assign(n, -1);
+	dfs(root, root);
+}
+
+int jmp(int nod, int steps) {
 	rep(i,0,sz(tbl))
-		if(steps&(1<<i)) nod = tbl[i][nod];
+		if (steps & (1<<i)) nod = tbl[i][nod];
 	return nod;
 }
 
-int lca(vector<vi>& tbl, vi& depth, int a, int b) {
+int lca(int a, int b) {
 	if (depth[a] < depth[b]) swap(a, b);
 	a = jmp(tbl, a, depth[a] - depth[b]);
 	if (a == b) return a;

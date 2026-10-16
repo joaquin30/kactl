@@ -15,14 +15,16 @@ vector<vi> adj;
 bool del[maxn];
 int par[maxn]; // parent in centroid decomposition
 int szt[maxn]; // size of subtree
+
 int calcsz(int u, int p) {
 	szt[u] = 1;
 	for (int v : adj[u]) if (v != p && !del[v])
 		szt[u] += calcsz(v, u);
 	return szt[u];
 }
-void cdfs(int u = 0, int p = -1, int szu = -1) {
-	if (szu < 0) szu = calcsz(u, -1);
+
+void cdfs(int u, int p, int szu = -1) {
+	if (szu < 0) szu = calcsz(u, u);
 	for (int v : adj[u]) {
 		if (!del[v] && szt[v] * 2 >= szu) {
 			szt[u] = 0;
@@ -34,8 +36,4 @@ void cdfs(int u = 0, int p = -1, int szu = -1) {
 	par[u] = p;
 	// process centroid u
 	for (int v : adj[u]) if (!del[v]) cdfs(v, u);
-}
-void centroid() {
-	memset(del, false, sizeof(del));
-	cdfs();
 }

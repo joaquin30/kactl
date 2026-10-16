@@ -29,16 +29,15 @@ vi match(const string& s, const string& pat) {
 
 vector<vi> kmp(const string& pat, int alpha = 26) {
 	int m = sz(pat);
-	vector<vi> kmp(m+1, vi(alpha));
+	vector<vi> A(m+1, vi(alpha, 0));
 	vi p = pi(pat);
-	rep(i,0,m+1) {
+	rep(c,0,alpha)
+		A[0][c] = (m > 0 && pat[0] == c+'a') ? 1 : 0;
+	rep(i,1,m+1) {
 		rep(c,0,alpha) {
-			int j = i;
-			while (j > 0 && (j == m || pat[j] != c+'a'))
-				j = p[j-1];
-			if (j < m && pat[j] == c+'a') ++j;
-			kmp[i][c]=j;
+			if (i < m && pat[i] == c+'a') A[i][c] = i+1;
+			else A[i][c] = A[p[i-1]][c]; 
 		}
 	}
-	return kmp;
+	return A;
 }
