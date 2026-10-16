@@ -1,5 +1,7 @@
 # (AU-)KACTL
 
+**Nota:** Este repositorio se ha modificado para usar git LFS y se modificó y añadió algoritmos y estructuras de datos.
+
 This repository contains a fork of KACTL (more info below).
 
 Some of the content has been excluded to make room for new algorithms. This fork also includes some algorithms implemented in Python, as well as a useful template for Python in programming competitions.

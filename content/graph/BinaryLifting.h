@@ -37,7 +37,7 @@ int jmp(int nod, int steps) {
 
 int lca(int a, int b) {
 	if (depth[a] < depth[b]) swap(a, b);
-	a = jmp(tbl, a, depth[a] - depth[b]);
+	a = jmp(a, depth[a] - depth[b]);
 	if (a == b) return a;
 	for (int i = sz(tbl); i--;) {
 		int c = tbl[i][a], d = tbl[i][b];

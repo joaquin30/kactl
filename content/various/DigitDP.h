@@ -1,4 +1,3 @@
-
 /**
  * Author: Jon.Snow
  * License: CC0
@@ -10,7 +9,7 @@
 int dp[20][2][200];
 int digit_dp(const string& s) {
 	int n = sz(s);
-	//empty suffixes having sum=0
+	// empty suffixes having sum = 0
 	dp[n][0][0] = 1;
 	dp[n][1][0] = 1;
 	for (int i = n-1; i >= 0; i--) {
@@ -28,8 +27,7 @@ int digit_dp(const string& s) {
 	}
 	int ans = 0;
 	rep(i,0,200) {
-		if (isPrime(i))
-			ans += dp[0][1][i];
+		if (isPrime(i)) ans += dp[0][1][i];
 	}
 	return ans;
 }

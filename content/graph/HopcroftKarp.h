@@ -5,8 +5,9 @@
  * Description: Fast bipartite matching algorithm. Graph $g$ should be a list
  * of neighbors of the left partition, and $r$ should be a vector full of
  * $-1$'s of the same size as the right partition. Returns the size of
- * the matching. $r[i]$ will be the match for vertex $i$ on the right side,
- * or $-1$ if it's not matched.
+ * the matching. $btoa[i]$ (r in the function) will be the match for vertex
+ * $i$ on the right side, or $-1$ if it's not matched.
+ * Usage: vi btoa(m, -1); hopcroftKarp(g, btoa);
  * Time: O(E \sqrt{V})
  * Status: stress-tested by MinimumVertexCover and tested on Library Checker
  */
