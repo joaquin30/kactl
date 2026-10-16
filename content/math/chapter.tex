@@ -38,22 +38,20 @@ where $A_i'$ is $A$ with the $i$'th column replaced by $b$.
 
 \subsection{Triangles}
 
-Given three points $p_1, p_2, p_3$ and $k = (p_2 - p_1) \times (p_3 - p_2)$ (cross product). If $k<0$, the points are in clockwise order. If $k>0$, the points are in counter-clockwise order. And if $k=0$, the points are collinear. The area of the triangle is $|k|/2$.
+Given three points $p_1, p_2, p_3$ and $k = (p_2 - p_1) \times (p_3 - p_2)$ (cross product).
+If $k<0$, the points are in clockwise order. If $k>0$, the points are in counter-clockwise order. And if $k=0$, the points are collinear.
+The area of the triangle is $|k|/2$.
 
-% Given a triangle with side lengths $a, b, c$ and opposite angles $\alpha, \beta, \gamma$, we can find the unknown sides and angles by repeatedly using the first usable equation from the following list:
-% \begin{align*}
-% \alpha &{}= \pi - \beta - \gamma\\
-% \alpha &{}= \cos^{-1}\left(\frac{b^2 + c^2 - a^2}{2 b c}\right)\\
-% \alpha &{}= \sin^{-1}\left(\frac{a \sin \beta}{b}\right)\\
-% a &{}= \sqrt{b^2 + c^2 - 2 b c \times \cos \alpha}\\
-% a &{}= \frac{b \sin \alpha}{\sin \beta}\\
-% \end{align*}
+Side lengths: $a,b,c$\\
 Semiperimeter: $p=\dfrac{a+b+c}{2}$\\
 Area: $A=\sqrt{p(p-a)(p-b)(p-c)}$\\
 Circumradius: $R=\dfrac{abc}{4A}$\\
 Inradius: $r=\dfrac{A}{p}$\\
 Length of median (divides triangle into two equal-area triangles): $m_a=\tfrac{1}{2}\sqrt{2b^2+2c^2-a^2}$\\
 Length of bisector (divides angles in two): $s_a=\sqrt{bc\left[1-\left(\dfrac{a}{b+c}\right)^2\right]}$\\
+Law of sines: $\dfrac{\sin\alpha}{a}=\dfrac{\sin\beta}{b}=\dfrac{\sin\gamma}{c}=\dfrac{1}{2R}$\\
+Law of cosines: $a^2=b^2+c^2-2bc\cos\alpha$\\
+Law of tangents: $\dfrac{a+b}{a-b}=\dfrac{\tan\dfrac{\alpha+\beta}{2}}{\tan\dfrac{\alpha-\beta}{2}}$\\
 
 % \subsection{Quadrilaterals}
 % With side lengths $a,b,c,d$, diagonals $e, f$, diagonals angle $\theta$, area $A$ and
@@ -88,7 +86,6 @@ Length of bisector (divides angles in two): $s_a=\sqrt{bc\left[1-\left(\dfrac{a}
 % Integration by parts:
 % \[\int_a^bf(x)g(x)dx = [F(x)g(x)]_a^b-\int_a^bF(x)g'(x)dx\]
 
-%\columnbreak
 \section{Sums}
 \[ c^a + c^{a+1} + \dots + c^{b} = \frac{c^{b+1} - c^a}{c-1}, c \neq 1 \]
 \begin{align*}

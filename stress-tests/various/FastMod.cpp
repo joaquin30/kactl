@@ -1,12 +1,12 @@
 #include "../utilities/template.h"
 
-#include "../../content/various/FastDivMod.h"
+#include "../../content/various/FastMod.h"
 
 typedef unsigned long long ull;
 struct OldBarrett {
 	ull b, m;
 	OldBarrett(ull b) : b(b), m(-1ULL / b) {}
-	ull mod(ull a) {
+	ull reduce(ull a) {
 		ull q = (ull)((__uint128_t(m) * a) >> 64), r = a - q * b;
 		return r >= b ? r - b : r;
 	}
@@ -80,7 +80,7 @@ void perf_const() {
 }
 
 #define INIT(x) ll ret##x = (x + 1);
-#define UPDATE(x) ret##x = bar.mod(ret##x * i);
+#define UPDATE(x) ret##x = bar.reduce(ret##x * i);
 #define FINISH(x) cout << ret##x << endl;
 void perf_old_barrett(int mod) {
 	OldBarrett bar(mod);
@@ -111,7 +111,7 @@ int main1() {
 	const int bflim = 3000;
 	rep(a,0,bflim) rep(b,2,bflim) {
 		FastMod bar(b);
-		ull ret = bar.mod(a);
+		ull ret = bar.reduce(a);
 		assert((ret == 0) == (a == 0));
 		if (ret >= (ull)b) ret -= b;
 		assert(ret == (ull)(a % b));
@@ -121,11 +121,9 @@ int main1() {
 		ull b = rand_u64();
 		if (b == 0) continue;
 		FastMod bar(b);
-		ull ret = bar.mod(a);
+		ull ret = bar.reduce(a);
 		if (ret >= b) ret -= b;
 		assert(ret == a % b);
-		ret = bar.div(a);
-		assert(ret == a / b);
 	}
 	cout<<"Tests passed!"<<endl;
 	return 0;
