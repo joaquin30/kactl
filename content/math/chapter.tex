@@ -207,3 +207,15 @@ The algorithm guarantees that every element occurring more than $n/k$ times appe
 
 \subsection{Absolute value equivalence}
 $|t-s| = -2\min(s,t) + s + t = 2\max(s,t) - s - t$
+
+\subsection{Sprague-Grundy Theorem}
+Applies to finite impartial two-player games under normal play: both players have
+the same available moves, and the player unable to move loses.
+
+For a state $s$, its Grundy number is: $G(s) = \operatorname{mex}\{G(t) \mid s \rightarrow t\}$,
+where $t$ represents every state reachable from $s$ in one move. A terminal state has $G(s) = 0$.
+For $k$ independent games played simultaneously, their combined
+Grundy number is:  $ G = G_1 \oplus G_2 \oplus \cdots \oplus G_k $.
+
+A Grundy number corresponds to a fully equivalent Nim game, where the current player has
+a winning strategy if the xor of the piles is not zero.
